@@ -1,6 +1,6 @@
-import AppKit
 import Foundation
 import Observation
+import SwiftUI
 
 @MainActor
 @Observable
@@ -11,40 +11,46 @@ final class QOLSettings {
     private let defaults: UserDefaults
 
     var musicPulseEnabled: Bool { didSet { save(musicPulseEnabled, for: "musicPulseEnabled") } }
-    var musicPulseRingCount: Int { didSet { save(musicPulseRingCount, for: "musicPulseRingCount") } }
-    var musicPulseOpacity: Double { didSet { save(musicPulseOpacity, for: "musicPulseOpacity") } }
-    var musicPulseExpansion: Double { didSet { save(musicPulseExpansion, for: "musicPulseExpansion") } }
-    var musicPulseDuration: Double { didSet { save(musicPulseDuration, for: "musicPulseDuration") } }
-    var musicPulseLineWidth: Double { didSet { save(musicPulseLineWidth, for: "musicPulseLineWidth") } }
+    var musicPulseMinimumOpacity: Double { didSet { save(musicPulseMinimumOpacity, for: "musicPulseMinimumOpacity") } }
+    var musicPulseMaximumOpacity: Double { didSet { save(musicPulseMaximumOpacity, for: "musicPulseMaximumOpacity") } }
+    var musicPulseFadeInterval: Double { didSet { save(musicPulseFadeInterval, for: "musicPulseFadeInterval") } }
+    var musicPulseBorderWidth: Double { didSet { save(musicPulseBorderWidth, for: "musicPulseBorderWidth") } }
+    var musicPulseCornerRadius: Double { didSet { save(musicPulseCornerRadius, for: "musicPulseCornerRadius") } }
 
-    var commandLensEnabled: Bool { didSet { save(commandLensEnabled, for: "commandLensEnabled") } }
-    var commandLensHoldDelay: Double { didSet { save(commandLensHoldDelay, for: "commandLensHoldDelay") } }
-    var commandLensShowUnassigned: Bool { didSet { save(commandLensShowUnassigned, for: "commandLensShowUnassigned") } }
-    var commandLensOpacity: Double { didSet { save(commandLensOpacity, for: "commandLensOpacity") } }
+    var cursorEnabled: Bool { didSet { save(cursorEnabled, for: "cursorEnabled") } }
+    var cursorFillColor: Color { didSet { saveColor(cursorFillColor, for: "cursorFillColor") } }
+    var cursorFillOpacity: Double { didSet { save(cursorFillOpacity, for: "cursorFillOpacity") } }
+    var cursorOutlineEnabled: Bool { didSet { save(cursorOutlineEnabled, for: "cursorOutlineEnabled") } }
+    var cursorOutlineColor: Color { didSet { saveColor(cursorOutlineColor, for: "cursorOutlineColor") } }
+    var cursorOutlineOpacity: Double { didSet { save(cursorOutlineOpacity, for: "cursorOutlineOpacity") } }
+    var cursorOutlineWidth: Double { didSet { save(cursorOutlineWidth, for: "cursorOutlineWidth") } }
+    var cursorSize: Double { didSet { save(cursorSize, for: "cursorSize") } }
+    var cursorCornerRadius: Double { didSet { save(cursorCornerRadius, for: "cursorCornerRadius") } }
 
-    var appCapsuleEnabled: Bool { didSet { save(appCapsuleEnabled, for: "appCapsuleEnabled") } }
-    var appCapsuleShowDocument: Bool { didSet { save(appCapsuleShowDocument, for: "appCapsuleShowDocument") } }
-    var appCapsuleShowUnsaved: Bool { didSet { save(appCapsuleShowUnsaved, for: "appCapsuleShowUnsaved") } }
+    var softScrollEdgesEnabled: Bool { didSet { save(softScrollEdgesEnabled, for: "softScrollEdgesEnabled") } }
 
     init() {
         let defaults = UserDefaults(suiteName: Self.suiteName) ?? .standard
         self.defaults = defaults
 
         musicPulseEnabled = defaults.object(forKey: "musicPulseEnabled") as? Bool ?? true
-        musicPulseRingCount = defaults.object(forKey: "musicPulseRingCount") as? Int ?? 3
-        musicPulseOpacity = defaults.object(forKey: "musicPulseOpacity") as? Double ?? 0.72
-        musicPulseExpansion = defaults.object(forKey: "musicPulseExpansion") as? Double ?? 1.34
-        musicPulseDuration = defaults.object(forKey: "musicPulseDuration") as? Double ?? 1.8
-        musicPulseLineWidth = defaults.object(forKey: "musicPulseLineWidth") as? Double ?? 2.0
+        musicPulseMinimumOpacity = defaults.object(forKey: "musicPulseMinimumOpacity") as? Double ?? 0.24
+        musicPulseMaximumOpacity = defaults.object(forKey: "musicPulseMaximumOpacity") as? Double ?? 0.95
+        musicPulseFadeInterval = defaults.object(forKey: "musicPulseFadeInterval") as? Double ?? 0.45
+        musicPulseBorderWidth = defaults.object(forKey: "musicPulseBorderWidth") as? Double ?? 2.5
+        musicPulseCornerRadius = defaults.object(forKey: "musicPulseCornerRadius") as? Double ?? 14.0
 
-        commandLensEnabled = defaults.object(forKey: "commandLensEnabled") as? Bool ?? true
-        commandLensHoldDelay = defaults.object(forKey: "commandLensHoldDelay") as? Double ?? 0.45
-        commandLensShowUnassigned = defaults.object(forKey: "commandLensShowUnassigned") as? Bool ?? true
-        commandLensOpacity = defaults.object(forKey: "commandLensOpacity") as? Double ?? 0.9
+        cursorEnabled = defaults.object(forKey: "cursorEnabled") as? Bool ?? true
+        cursorFillColor = Self.color(defaults: defaults, key: "cursorFillColor", fallback: .black)
+        cursorFillOpacity = defaults.object(forKey: "cursorFillOpacity") as? Double ?? 1.0
+        cursorOutlineEnabled = defaults.object(forKey: "cursorOutlineEnabled") as? Bool ?? true
+        cursorOutlineColor = Self.color(defaults: defaults, key: "cursorOutlineColor", fallback: .white)
+        cursorOutlineOpacity = defaults.object(forKey: "cursorOutlineOpacity") as? Double ?? 0.92
+        cursorOutlineWidth = defaults.object(forKey: "cursorOutlineWidth") as? Double ?? 1.5
+        cursorSize = defaults.object(forKey: "cursorSize") as? Double ?? 22.0
+        cursorCornerRadius = defaults.object(forKey: "cursorCornerRadius") as? Double ?? 11.0
 
-        appCapsuleEnabled = defaults.object(forKey: "appCapsuleEnabled") as? Bool ?? true
-        appCapsuleShowDocument = defaults.object(forKey: "appCapsuleShowDocument") as? Bool ?? true
-        appCapsuleShowUnsaved = defaults.object(forKey: "appCapsuleShowUnsaved") as? Bool ?? true
+        softScrollEdgesEnabled = defaults.object(forKey: "softScrollEdgesEnabled") as? Bool ?? true
     }
 
     func applyChanges() {
@@ -59,10 +65,7 @@ final class QOLSettings {
 
     func restartDock() {
         applyChanges()
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/killall")
-        process.arguments = ["Dock"]
-        try? process.run()
+        run("/usr/bin/killall", arguments: ["Dock"])
     }
 
     func previewMusicPulse() {
@@ -70,14 +73,24 @@ final class QOLSettings {
         post(name: "com.omeriadon.QOL.previewMusicPulse")
     }
 
-    func previewCommandLens() {
-        applyChanges()
-        post(name: "com.omeriadon.QOL.previewCommandLens")
+    private func run(_ executable: String, arguments: [String]) {
+        let process = Process()
+        process.executableURL = URL(fileURLWithPath: executable)
+        process.arguments = arguments
+        try? process.run()
     }
 
     private func save(_ value: Any, for key: String) {
         defaults.set(value, forKey: key)
         applyChanges()
+    }
+
+    private func saveColor(_ color: Color, for key: String) {
+        guard let color = NSColor(color).usingColorSpace(.sRGB) else { return }
+        let serialized = [color.redComponent, color.greenComponent, color.blueComponent]
+            .map(String.init)
+            .joined(separator: ",")
+        save(serialized, for: key)
     }
 
     private func post(name: String) {
@@ -87,5 +100,12 @@ final class QOLSettings {
             userInfo: nil,
             deliverImmediately: true
         )
+    }
+
+    private static func color(defaults: UserDefaults, key: String, fallback: Color) -> Color {
+        guard let value = defaults.string(forKey: key) else { return fallback }
+        let components = value.split(separator: ",").compactMap { Double($0) }
+        guard components.count == 3 else { return fallback }
+        return Color(red: components[0], green: components[1], blue: components[2])
     }
 }

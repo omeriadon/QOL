@@ -16,10 +16,12 @@ struct QOLRootView: View {
             switch selection ?? .musicPulse {
             case .musicPulse:
                 MusicPulseSettingsView(settings: settings)
-            case .commandLens:
-                CommandLensSettingsView(settings: settings)
-            case .appCapsule:
-                AppCapsuleSettingsView(settings: settings)
+            case .cursor:
+                CursorSettingsView(settings: settings)
+            case .folderLook:
+                FolderLookSettingsView()
+            case .softScrollEdges:
+                SoftScrollEdgesSettingsView(settings: settings)
             }
         }
         .frame(minWidth: 720, minHeight: 540)
@@ -29,4 +31,3 @@ struct QOLRootView: View {
 #Preview {
     QOLRootView(settings: QOLSettings())
 }
-

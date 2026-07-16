@@ -1,7 +1,7 @@
 @import AppKit;
 
-#import "QOLAppCapsuleController.h"
-#import "QOLCommandLensController.h"
+#import "QOLCursorController.h"
+#import "QOLSoftScrollEdgesController.h"
 
 @interface QOLAppsRuntime : NSObject
 @end
@@ -12,16 +12,16 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier ?: @"";
         NSString *packageType = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundlePackageType"] ?: @"";
-        if (![packageType isEqualToString:@"APPL"] ||
+        BOOL finder = [bundleIdentifier isEqualToString:@"com.apple.finder"];
+        if ((!finder && ![packageType isEqualToString:@"APPL"]) ||
             [bundleIdentifier isEqualToString:@"com.omeriadon.QOLSettings"] ||
             NSApp == nil) {
             return;
         }
 
-        [QOLCommandLensController install];
-        [QOLAppCapsuleController install];
+        [QOLCursorController install];
+        [QOLSoftScrollEdgesController install];
     });
 }
 
 @end
-

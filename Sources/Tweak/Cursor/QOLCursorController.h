@@ -2,9 +2,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface QOLAppCapsuleController : NSObject
+@interface QOLCursorController : NSObject
+
 + (void)install;
+
 @end
 
 NS_ASSUME_NONNULL_END
-

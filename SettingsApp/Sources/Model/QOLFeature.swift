@@ -2,25 +2,27 @@ import Foundation
 
 enum QOLFeature: String, CaseIterable, Identifiable {
     case musicPulse
-    case commandLens
-    case appCapsule
+    case cursor
+    case folderLook
+    case softScrollEdges
 
     var id: Self { self }
 
     var title: String {
         switch self {
         case .musicPulse: "Music Pulse"
-        case .commandLens: "Command Lens"
-        case .appCapsule: "App Capsule"
+        case .cursor: "Cursor"
+        case .folderLook: "Folder Look"
+        case .softScrollEdges: "Soft Scroll Edges"
         }
     }
 
     var systemImage: String {
         switch self {
         case .musicPulse: "music.note"
-        case .commandLens: "command"
-        case .appCapsule: "menubar.rectangle"
+        case .cursor: "cursorarrow"
+        case .folderLook: "folder"
+        case .softScrollEdges: "scroll"
         }
     }
 }
-
