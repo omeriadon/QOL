@@ -1,0 +1,216 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXFileReference section */
+		A10000000000000000000001 /* QOL.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QOL.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		A10000000000000000000002 /* Sources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Sources;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A10000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A10000000000000000000004 = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000002 /* Sources */,
+				A10000000000000000000005 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A10000000000000000000005 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A10000000000000000000001 /* QOL.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A10000000000000000000006 /* QOLSettings */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A10000000000000000000007 /* Build configuration list for PBXNativeTarget "QOLSettings" */;
+			buildPhases = (
+				A10000000000000000000008 /* Sources */,
+				A10000000000000000000003 /* Frameworks */,
+				A10000000000000000000009 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			fileSystemSynchronizedGroups = (
+				A10000000000000000000002 /* Sources */,
+			);
+			name = QOLSettings;
+			packageProductDependencies = ();
+			productName = QOLSettings;
+			productReference = A10000000000000000000001 /* QOL.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A1000000000000000000000A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
+				TargetAttributes = {
+					A10000000000000000000006 = { CreatedOnToolsVersion = 27.0; };
+				};
+			};
+			buildConfigurationList = A1000000000000000000000B /* Build configuration list for PBXProject "QOLSettings" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = A10000000000000000000004;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = A10000000000000000000005 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (A10000000000000000000006 /* QOLSettings */);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A10000000000000000000009 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A10000000000000000000008 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A1000000000000000000000C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.2;
+			};
+			name = Debug;
+		};
+		A1000000000000000000000D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.2;
+			};
+			name = Release;
+		};
+		A1000000000000000000000E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = P6PV2R9443;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = QOL;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.omeriadon.QOLSettings;
+				PRODUCT_MODULE_NAME = QOLSettings;
+				PRODUCT_NAME = QOL;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		A1000000000000000000000F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = P6PV2R9443;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = QOL;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/../Frameworks");
+				MACOSX_DEPLOYMENT_TARGET = 15.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.omeriadon.QOLSettings;
+				PRODUCT_MODULE_NAME = QOLSettings;
+				PRODUCT_NAME = QOL;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A10000000000000000000007 /* Build configuration list for PBXNativeTarget "QOLSettings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A1000000000000000000000E /* Debug */, A1000000000000000000000F /* Release */);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A1000000000000000000000B /* Build configuration list for PBXProject "QOLSettings" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (A1000000000000000000000C /* Debug */, A1000000000000000000000D /* Release */);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A1000000000000000000000A /* Project object */;
+}

@@ -1,0 +1,35 @@
+launchd
+logd
+WindowServer
+Dock
+loginwindow
+cfprefsd
+distnoted
+runningboardd
+coreservicesd
+coreaudiod
+securityd
+trustd
+amfid
+tccd
+powerd
+mds
+mds_stores
+iconservicesd
+notificationcenterui
+NotificationCenter
+SystemUIServer
+ControlCenter
+WindowManager
+MenuBarAgent
+Raycast.app
+Raycast Beta
+node
+com.apple.WebKit.WebContent
+com.apple.WebKit.GPU
+com.apple.WebKit.Networking
+Electron Helper
+Electron Helper (GPU)
+Electron Helper (Plugin)
+Electron Helper (Renderer)
+QOL
