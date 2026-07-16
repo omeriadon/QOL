@@ -8,7 +8,7 @@ struct SoftScrollEdgesSettingsView: View {
             Section {
                 FeatureHeader(
                     title: "Soft Scroll Edges",
-                    subtitle: "Traverses AppKit view and controller trees and changes every compatible scroll-edge style to soft.",
+                    subtitle: "Redirects AppKit and SwiftUI hard or automatic scroll-edge styles to soft.",
                     systemImage: "scroll"
                 )
             }
@@ -20,7 +20,7 @@ struct SoftScrollEdgesSettingsView: View {
             Section {
                 Button("Reapply to Open Applications", systemImage: "checkmark", action: settings.applyChanges)
             } footer: {
-                Text("This installs automatically when each application starts. QOL immediately traverses existing windows, watches newly added views, and forces compatible titlebar and split-view accessory setters to soft. The button only refreshes applications that are already open.")
+                Text("This installs automatically when each application starts. QOL redirects AppKit style sources, rebinds SwiftUI’s hard and automatic style accessors, and traverses compatible existing views. The button only refreshes applications that are already open.")
             }
         }
         .formStyle(.grouped)

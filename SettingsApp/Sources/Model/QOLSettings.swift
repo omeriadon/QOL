@@ -11,9 +11,7 @@ final class QOLSettings {
     private let defaults: UserDefaults
 
     var musicPulseEnabled: Bool { didSet { save(musicPulseEnabled, for: "musicPulseEnabled") } }
-    var musicPulseMinimumOpacity: Double { didSet { save(musicPulseMinimumOpacity, for: "musicPulseMinimumOpacity") } }
-    var musicPulseMaximumOpacity: Double { didSet { save(musicPulseMaximumOpacity, for: "musicPulseMaximumOpacity") } }
-    var musicPulseFadeInterval: Double { didSet { save(musicPulseFadeInterval, for: "musicPulseFadeInterval") } }
+    var musicPulseOpacity: Double { didSet { save(musicPulseOpacity, for: "musicPulseOpacity") } }
     var musicPulseBorderWidth: Double { didSet { save(musicPulseBorderWidth, for: "musicPulseBorderWidth") } }
     var musicPulseCornerRadius: Double { didSet { save(musicPulseCornerRadius, for: "musicPulseCornerRadius") } }
 
@@ -34,9 +32,9 @@ final class QOLSettings {
         self.defaults = defaults
 
         musicPulseEnabled = defaults.object(forKey: "musicPulseEnabled") as? Bool ?? true
-        musicPulseMinimumOpacity = defaults.object(forKey: "musicPulseMinimumOpacity") as? Double ?? 0.24
-        musicPulseMaximumOpacity = defaults.object(forKey: "musicPulseMaximumOpacity") as? Double ?? 0.95
-        musicPulseFadeInterval = defaults.object(forKey: "musicPulseFadeInterval") as? Double ?? 0.45
+        musicPulseOpacity = defaults.object(forKey: "musicPulseOpacity") as? Double
+            ?? defaults.object(forKey: "musicPulseMaximumOpacity") as? Double
+            ?? 0.95
         musicPulseBorderWidth = defaults.object(forKey: "musicPulseBorderWidth") as? Double ?? 2.5
         musicPulseCornerRadius = defaults.object(forKey: "musicPulseCornerRadius") as? Double ?? 14.0
 

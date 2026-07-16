@@ -2,10 +2,10 @@
 
 QOL is a multi-feature quality-of-life tweak for macOS. It currently contains:
 
-- Music Pulse: a red border matching the Music Dock icon rapidly fades between configurable opacities during Apple Music playback.
+- Music Pulse: a fixed red border matching the Music Dock icon appears during Apple Music playback.
 - Cursor: a static rounded-rectangle replacement for the standard AppKit arrow with configurable size, corner radius, fill, opacity, and outline.
 - Folder Look: documents the protected system resources used for Finder's default folder art.
-- Soft Scroll Edges: installs at application startup, traverses AppKit view/controller trees, and forces compatible scroll-edge effects to the soft style.
+- Soft Scroll Edges: installs at application startup and redirects AppKit and SwiftUI hard or automatic scroll-edge effects to the soft style.
 
 The tweak is organized by feature under `Sources/Tweak`. Its settings app is a separate SwiftUI Xcode project under `SettingsApp`. Ammonia receives two internal components: a Dock-whitelisted dylib and an ordinary-AppKit/Finder dylib. Both are one QOL product and share the same settings suite.
 

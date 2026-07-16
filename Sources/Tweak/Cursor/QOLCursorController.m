@@ -6,7 +6,11 @@
 #import "QOLPreferences.h"
 
 static NSCursor *QOLCustomArrowCursor;
+static NSCursor *QOLSystemArrowCursor;
 static NSCursor *(*QOLOriginalArrowCursor)(id, SEL);
+static void (*QOLOriginalCursorSet)(id, SEL);
+static void (*QOLOriginalCursorPush)(id, SEL);
+static void (*QOLOriginalClearOverrideAndSetArrow)(id, SEL);
 
 static NSCursor *QOLBuildArrowCursor(void) {
     if (!QOLBool(@"cursorEnabled", YES)) {
@@ -49,6 +53,28 @@ static NSCursor *QOLArrowCursor(id self, SEL command) {
     return QOLCustomArrowCursor;
 }
 
+static NSCursor *QOLResolvedCursor(id cursor) {
+    if (!QOLBool(@"cursorEnabled", YES) || cursor != QOLSystemArrowCursor) return cursor;
+    if (!QOLCustomArrowCursor) QOLCustomArrowCursor = QOLBuildArrowCursor();
+    return QOLCustomArrowCursor ?: cursor;
+}
+
+static void QOLCursorSet(id self, SEL command) {
+    if (QOLOriginalCursorSet) QOLOriginalCursorSet(QOLResolvedCursor(self), command);
+}
+
+static void QOLCursorPush(id self, SEL command) {
+    if (QOLOriginalCursorPush) QOLOriginalCursorPush(QOLResolvedCursor(self), command);
+}
+
+static void QOLClearOverrideAndSetArrow(id self, SEL command) {
+    if (QOLOriginalClearOverrideAndSetArrow) QOLOriginalClearOverrideAndSetArrow(self, command);
+    if (QOLBool(@"cursorEnabled", YES)) {
+        if (!QOLCustomArrowCursor) QOLCustomArrowCursor = QOLBuildArrowCursor();
+        [QOLCustomArrowCursor set];
+    }
+}
+
 @interface QOLCursorController ()
 - (void)settingsDidChange:(NSNotification *)notification;
 @end
@@ -67,7 +93,24 @@ static NSCursor *QOLArrowCursor(id self, SEL command) {
     Method method = class_getClassMethod(NSCursor.class, @selector(arrowCursor));
     if (method) {
         QOLOriginalArrowCursor = (NSCursor *(*)(id, SEL))method_getImplementation(method);
+        QOLSystemArrowCursor = QOLOriginalArrowCursor(NSCursor.class, @selector(arrowCursor));
         method_setImplementation(method, (IMP)QOLArrowCursor);
+    }
+
+    Method setMethod = class_getInstanceMethod(NSCursor.class, @selector(set));
+    if (setMethod) {
+        QOLOriginalCursorSet = (void (*)(id, SEL))method_setImplementation(setMethod, (IMP)QOLCursorSet);
+    }
+    Method pushMethod = class_getInstanceMethod(NSCursor.class, @selector(push));
+    if (pushMethod) {
+        QOLOriginalCursorPush = (void (*)(id, SEL))method_setImplementation(pushMethod, (IMP)QOLCursorPush);
+    }
+    Method clearMethod = class_getClassMethod(NSCursor.class, NSSelectorFromString(@"_clearOverrideCursorAndSetArrow"));
+    if (clearMethod) {
+        QOLOriginalClearOverrideAndSetArrow = (void (*)(id, SEL))method_setImplementation(
+            clearMethod,
+            (IMP)QOLClearOverrideAndSetArrow
+        );
     }
 
     QOLCursorController *controller = self.sharedController;

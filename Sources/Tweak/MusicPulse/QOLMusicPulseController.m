@@ -17,9 +17,7 @@ static NSHashTable *QOLMusicTiles;
 static BOOL QOLMusicIsPlaying;
 static NSDate *QOLMusicPreviewEndDate;
 static BOOL QOLMusicPulseEnabled;
-static CGFloat QOLMusicMinimumOpacity;
-static CGFloat QOLMusicMaximumOpacity;
-static CGFloat QOLMusicRingDuration;
+static CGFloat QOLMusicOpacity;
 static CGFloat QOLMusicRingWidth;
 static CGFloat QOLMusicCornerRadius;
 
@@ -51,9 +49,8 @@ static CALayer *QOLImageLayer(CALayer *tileLayer) {
 
 static void QOLLoadMusicPulseSettings(void) {
     QOLMusicPulseEnabled = QOLBool(@"musicPulseEnabled", YES);
-    QOLMusicMinimumOpacity = MIN(MAX(QOLDouble(@"musicPulseMinimumOpacity", 0.24), 0.05), 0.9);
-    QOLMusicMaximumOpacity = MIN(MAX(QOLDouble(@"musicPulseMaximumOpacity", 0.95), 0.1), 1.0);
-    QOLMusicRingDuration = MIN(MAX(QOLDouble(@"musicPulseFadeInterval", 0.45), 0.15), 1.5);
+    QOLMusicOpacity = MIN(MAX(QOLDouble(@"musicPulseOpacity",
+                                       QOLDouble(@"musicPulseMaximumOpacity", 0.95)), 0.05), 1.0);
     QOLMusicRingWidth = MIN(MAX(QOLDouble(@"musicPulseBorderWidth", 2.5), 0.5), 8.0);
     QOLMusicCornerRadius = MIN(MAX(QOLDouble(@"musicPulseCornerRadius", 14.0), 0.0), 64.0);
 }
@@ -67,18 +64,6 @@ static CALayer *QOLFindPulseContainer(CALayer *tileLayer) {
 
 static void QOLRemovePulse(CALayer *tileLayer) {
     [QOLFindPulseContainer(tileLayer) removeFromSuperlayer];
-}
-
-static void QOLAddRingAnimation(CAShapeLayer *ring) {
-    CABasicAnimation *opacity = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    opacity.fromValue = @(MIN(QOLMusicMinimumOpacity, QOLMusicMaximumOpacity));
-    opacity.toValue = @(MAX(QOLMusicMinimumOpacity, QOLMusicMaximumOpacity));
-    opacity.duration = QOLMusicRingDuration;
-    opacity.autoreverses = YES;
-    opacity.repeatCount = HUGE_VALF;
-    opacity.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
-    opacity.removedOnCompletion = NO;
-    [ring addAnimation:opacity forKey:@"qol.musicPulse.opacity"];
 }
 
 static void QOLUpdatePulseForTile(id tile) {
@@ -112,18 +97,17 @@ static void QOLUpdatePulseForTile(id tile) {
     ring.fillColor = NSColor.clearColor.CGColor;
     ring.strokeColor = [NSColor colorWithRed:1.0 green:0.04 blue:0.09 alpha:1.0].CGColor;
     ring.lineWidth = QOLMusicRingWidth;
-    ring.opacity = QOLMusicMaximumOpacity;
+    ring.opacity = QOLMusicOpacity;
     ring.shadowColor = [NSColor colorWithRed:1.0 green:0.0 blue:0.06 alpha:1.0].CGColor;
     ring.shadowOpacity = 0.3;
     ring.shadowRadius = 3.0;
     ring.shadowOffset = CGSizeZero;
     [container addSublayer:ring];
-    QOLAddRingAnimation(ring);
 
     [tileLayer insertSublayer:container above:imageLayer];
     NSUserDefaults *diagnostics = QOLDefaults();
     [diagnostics setObject:NSDate.date forKey:@"musicPulseLastEmissionDate"];
-    [diagnostics setDouble:QOLMusicRingDuration forKey:@"musicPulseLastFadeInterval"];
+    [diagnostics setDouble:QOLMusicOpacity forKey:@"musicPulseEffectiveOpacity"];
     [diagnostics setDouble:cornerRadius forKey:@"musicPulseEffectiveCornerRadius"];
 }
 

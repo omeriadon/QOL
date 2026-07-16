@@ -18,7 +18,7 @@ struct MusicPulsePreview: View {
                 )
                 .overlay {
                     RoundedRectangle(cornerRadius: settings.musicPulseCornerRadius)
-                        .stroke(.red.opacity(settings.musicPulseMaximumOpacity), lineWidth: settings.musicPulseBorderWidth)
+                        .stroke(.red.opacity(settings.musicPulseOpacity), lineWidth: settings.musicPulseBorderWidth)
                 }
         }
         .accessibilityElement(children: .ignore)

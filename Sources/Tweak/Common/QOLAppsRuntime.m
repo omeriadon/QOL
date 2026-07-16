@@ -13,9 +13,7 @@
         NSString *bundleIdentifier = NSBundle.mainBundle.bundleIdentifier ?: @"";
         NSString *packageType = [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundlePackageType"] ?: @"";
         BOOL finder = [bundleIdentifier isEqualToString:@"com.apple.finder"];
-        if ((!finder && ![packageType isEqualToString:@"APPL"]) ||
-            [bundleIdentifier isEqualToString:@"com.omeriadon.QOLSettings"] ||
-            NSApp == nil) {
+        if ((!finder && ![packageType isEqualToString:@"APPL"]) || NSApp == nil) {
             return;
         }
 
